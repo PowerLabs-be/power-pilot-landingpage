@@ -19,8 +19,8 @@ jobs:
         id: latest_frontend_version
         uses: abatilo/release-info-action@v1.3.3
         with:
-          owner: home-assistant
-          repo: frontend
+          owner: powerlabs-be
+          repo: power-pilot-frontend
       - name: Check if version is up to date
         id: check_version
         run: |
@@ -59,14 +59,14 @@ jobs:
       - name: Download release assets
         uses: robinraju/release-downloader@v1
         with:
-          repository: 'home-assistant/frontend'
+          repository: 'powerlabs-be/power-pilot-frontend'
           tag: ${{ needs.check-version.outputs.latest_version }}
-          fileName: home_assistant_frontend_landingpage-${{ needs.check-version.outputs.latest_version }}.tar.gz
+          fileName: power_pilot_frontend_landingpage-${{ needs.check-version.outputs.latest_version }}.tar.gz
           extract: true
           out-file-path: rootfs/usr/share/www/
       - name: Remove release assets archive
         run: |
-          rm -f rootfs/usr/share/www/home_assistant_frontend_landingpage-*.tar.gz
+          rm -f rootfs/usr/share/www/power_pilot_frontend_landingpage-*.tar.gz
       - name: Create PR
         uses: peter-evans/create-pull-request@v8
         with:
@@ -78,5 +78,5 @@ jobs:
           title: "Update frontend to version ${{ needs.check-version.outputs.latest_version }}"
           body: >
             Update frontend from ${{ needs.check-version.outputs.current_version }} to
-            [${{ needs.check-version.outputs.latest_version }}](https://github.com/home-assistant/frontend/releases/tag/${{ needs.check-version.outputs.latest_version }})
+            [${{ needs.check-version.outputs.latest_version }}](https://github.com/powerlabs-be/power-pilot-frontend/releases/tag/${{ needs.check-version.outputs.latest_version }})
 
