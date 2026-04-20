@@ -79,7 +79,7 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          image: ghcr.io/home-assistant/${{ matrix.machine }}-homeassistant
+          image: ghcr.io/powerlabs-be/${{ matrix.machine }}-power-pilot-core
           image-tags: |
             landingpage
           push: ${{ needs.init.outputs.publish == 'true' }}
