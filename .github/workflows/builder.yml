@@ -26,7 +26,7 @@ jobs:
 
       - name: Get version
         id: version
-        uses: home-assistant/actions/helpers/version@master
+        uses: powerlabs-be/power-pilot-actions/helpers/version@master
         with:
           type: ${{ env.BUILD_TYPE }}
 
