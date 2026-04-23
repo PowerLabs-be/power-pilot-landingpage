@@ -24,7 +24,7 @@ jobs:
       - name: Check if version is up to date
         id: check_version
         run: |
-          current_version="$(cat .ha-frontend-version)"
+          current_version="$(cat .pp-frontend-version)"
           latest_version="${{ steps.latest_frontend_version.outputs.latest_tag }}"
           echo "current_version=${current_version}" >> $GITHUB_OUTPUT
           echo "LATEST_VERSION=${latest_version}" >> $GITHUB_ENV
@@ -55,7 +55,7 @@ jobs:
           rm -rf rootfs/usr/share/www/*
       - name: Update version file
         run: |
-          echo "${{ needs.check-version.outputs.latest_version }}" > .ha-frontend-version
+          echo "${{ needs.check-version.outputs.latest_version }}" > .pp-frontend-version
       - name: Download release assets
         uses: robinraju/release-downloader@v1
         with:
