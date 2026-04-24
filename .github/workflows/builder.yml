@@ -1,6 +1,13 @@
 name: Build landingpage
 
 on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to container registry"
+        required: true
+        type: boolean
+        default: false
   pull_request:
     branches: ["main"]
   release:
@@ -17,7 +24,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
       channel: ${{ steps.version.outputs.channel }}
-      publish: ${{ steps.version.outputs.publish }}
+      publish: ${{ github.event_name == 'workflow_dispatch' && inputs.publish || steps.version.outputs.publish }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
