@@ -64,17 +64,25 @@ jobs:
           - raspberrypi5-64
           - yellow
           - green
+        # default arch for everything
+        arch: [aarch64]
+        # but explicitly add an amd64 dimension too
         include:
-          # amd64 machines
           - machine: generic-x86-64
             arch: amd64
             runs-on: ubuntu-24.04
           - machine: qemux86-64
             arch: amd64
             runs-on: ubuntu-24.04
-          # Default for the rest: aarch64 on native ARM runner
+          # set defaults for the aarch64 jobs
           - arch: aarch64
             runs-on: ubuntu-24.04-arm
+        # remove the two aarch64 builds we *don’t* want
+        exclude:
+          - machine: generic-x86-64
+            arch: aarch64
+          - machine: qemux86-64
+            arch: aarch64
     steps:
       - name: Checkout the repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
